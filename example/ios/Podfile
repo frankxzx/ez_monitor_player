@@ -61,6 +61,8 @@ target 'Runner' do
     File.symlink(p[:path], symlink)
     pod p[:name], :path => File.join(symlink, 'ios')
   }
+  
+  pod 'EZUIKit', :path => "/Users/frank/Downloads/EZUIKit-iOS-master/EZUIKit.podspec"
 end
 
 # Prevent Cocoapods from embedding a second Flutter framework and causing an error with the new Xcode build system.

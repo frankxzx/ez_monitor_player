@@ -6,9 +6,9 @@
 //
 
 #import "EzMonitorPlayer.h"
-#import "EZUIKit.h"
-#import "EZUIPlayer.h"
-#import "EZUIError.h"
+#import <EZUIKit/EZUIKit.h>
+#import <EZUIKit/EZUIPlayer.h>
+#import <EZUIKit/EZUIError.h>
 
 @implementation EzMonitorPlayer {
     UIView* _view;
@@ -23,15 +23,18 @@
                     arguments:(id _Nullable)args
               binaryMessenger:(NSObject<FlutterBinaryMessenger>*)messenger {
     if ([super init]) {
-        _view = [[UIView alloc]initWithFrame:frame];
+//        _view = [[UIView alloc]initWithFrame:frame];
+        _view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 300, 400)];
         _viewId = viewId;
-        NSString* channelName = [NSString stringWithFormat:@"plugins.weilu/flutter_2d_amap_%lld", viewId];
+        NSString* channelName = [NSString stringWithFormat:@"plugins.xzx/ez_monitor_player_%lld", viewId];
         _channel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:messenger];
         __weak __typeof__(self) weakSelf = self;
         [_channel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
             [weakSelf onMethodCall:call result:result];
         }];
         _param = args[@"foo"];
+        
+        [self playWithEzOpenUrl:@"ezopen://open.ys7.com/D01590415/1.hd.live"];
     }
     return self;
 }
@@ -74,73 +77,73 @@
     NSString *message = @"";
     if ([error.errorString isEqualToString:UE_ERROR_INNER_VERIFYCODE_ERROR])
     {
-        message = [NSString stringWithFormat:@"%@(%@[%ld])",LocalizedString(@"verify_code_wrong"),
-                   error.errorString,
-                   error.internalErrorCode];
+//        message = [NSString stringWithFormat:@"%@(%@[%ld])",LocalizedString(@"verify_code_wrong"),
+//                   error.errorString,
+//                   error.internalErrorCode];
     }
     else if ([error.errorString isEqualToString:UE_ERROR_TRANSF_DEVICE_OFFLINE])
     {
-        message = [NSString stringWithFormat:@"%@(%@[%d])",
-                   LocalizedString(@"device_offline"),
-                   error.errorString,
-                   error.internalErrorCode];
+//        message = [NSString stringWithFormat:@"%@(%@[%d])",
+//                   LocalizedString(@"device_offline"),
+//                   error.errorString,
+//                   error.internalErrorCode];
     }
     else if ([error.errorString isEqualToString:UE_ERROR_DEVICE_NOT_EXIST])
     {
-        message = [NSString stringWithFormat:@"%@(%@[%d])",
-                   LocalizedString(@"device_not_exist"),
-                   error.errorString,
-                   error.internalErrorCode];
+//        message = [NSString stringWithFormat:@"%@(%@[%d])",
+//                   LocalizedString(@"device_not_exist"),
+//                   error.errorString,
+//                   error.internalErrorCode];
     }
     else if ([error.errorString isEqualToString:UE_ERROR_CAMERA_NOT_EXIST])
     {
-        message = [NSString stringWithFormat:@"%@(%@[%d])",
-                   LocalizedString(@"camera_not_exist"),
-                   error.errorString,
-                   error.internalErrorCode];
+//        message = [NSString stringWithFormat:@"%@(%@[%d])",
+//                   LocalizedString(@"camera_not_exist"),
+//                   error.errorString,
+//                   error.internalErrorCode];
     }
     else if ([error.errorString isEqualToString:UE_ERROR_INNER_STREAM_TIMEOUT])
     {
-        message = [NSString stringWithFormat:@"%@(%@[%d])",
-                   LocalizedString(@"connect_out_time"),
-                   error.errorString,error.internalErrorCode];
+//        message = [NSString stringWithFormat:@"%@(%@[%d])",
+//                   LocalizedString(@"connect_out_time"),
+//                   error.errorString,error.internalErrorCode];
     }
     else if ([error.errorString isEqualToString:UE_ERROR_CAS_MSG_PU_NO_RESOURCE])
     {
-        message = [NSString stringWithFormat:@"%@(%@[%d])",
-                   LocalizedString(@"connect_device_limit"),
-                   error.errorString,
-                   error.internalErrorCode];
+//        message = [NSString stringWithFormat:@"%@(%@[%d])",
+//                   LocalizedString(@"connect_device_limit"),
+//                   error.errorString,
+//                   error.internalErrorCode];
     }
     else if ([error.errorString isEqualToString:UE_ERROR_NOT_FOUND_RECORD_FILES])
     {
-        message = [NSString stringWithFormat:@"%@(%@[%d])",
-                   LocalizedString(@"not_find_file"),
-                   error.errorString,
-                   error.internalErrorCode];
+//        message = [NSString stringWithFormat:@"%@(%@[%d])",
+//                   LocalizedString(@"not_find_file"),
+//                   error.errorString,
+//                   error.internalErrorCode];
     }
     else if ([error.errorString isEqualToString:UE_ERROR_PARAM_ERROR])
     {
-        message = [NSString stringWithFormat:@"%@(%@[%d])",
-                   LocalizedString(@"param_error"),
-                   error.errorString,
-                   error.internalErrorCode];
+//        message = [NSString stringWithFormat:@"%@(%@[%d])",
+//                   LocalizedString(@"param_error"),
+//                   error.errorString,
+//                   error.internalErrorCode];
     }
     else if ([error.errorString isEqualToString:UE_ERROR_URL_FORMAT_ERROR])
     {
-        message = [NSString stringWithFormat:@"%@(%@[%d])",
-                   LocalizedString(@"play_url_format_wrong"),
-                   error.errorString,
-                   error.internalErrorCode];
+//        message = [NSString stringWithFormat:@"%@(%@[%d])",
+//                   LocalizedString(@"play_url_format_wrong"),
+//                   error.errorString,
+//                   error.internalErrorCode];
     }
     else
     {
-        message = [NSString stringWithFormat:@"%@(%@[%d])",
-                   LocalizedString(@"play_fail"),
-                   error.errorString,
-                   error.internalErrorCode];
+//        message = [NSString stringWithFormat:@"%@(%@[%d])",
+//                   LocalizedString(@"play_fail"),
+//                   error.errorString,
+//                   error.internalErrorCode];
     }
-    [Toast error:message];
+//    [Toast error:message];
 }
 
 - (void) EZUIPlayer:(EZUIPlayer *)player previewWidth:(CGFloat)pWidth previewHeight:(CGFloat)pHeight

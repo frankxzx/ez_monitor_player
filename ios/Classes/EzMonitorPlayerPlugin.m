@@ -1,5 +1,6 @@
 #import "EzMonitorPlayerPlugin.h"
 #import "EzMonitorPlayer.h"
+#import <EZUIKit/EZUIKit.h>
 
 @implementation EzMonitorPlayerPlugin
 
@@ -9,6 +10,9 @@
 //            binaryMessenger:[registrar messenger]];
 //  EzMonitorPlayerPlugin* instance = [[EzMonitorPlayerPlugin alloc] init];
 //  [registrar addMethodCallDelegate:instance channel:channel];
+    
+    [EZUIKit initWithAppKey:@"6e9f8a8c05cb4e57843a85afdf49ff57"];
+    [EZUIKit setAccessToken:@"at.9bkf61je8xypdnj03ho1aj1sdfub8612-2dmoh97t8w-04mdr2y-lbphujgu4"];
 
   EzMonitorPlayerFactory* playerFactory =
   [[EzMonitorPlayerFactory alloc] initWithMessenger:registrar.messenger];

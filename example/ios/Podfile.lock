@@ -1,22 +1,35 @@
 PODS:
   - ez_monitor_player (0.0.1):
+    - EZOpenSDK
     - Flutter
+  - EZOpenSDK (4.8.3)
+  - EZUIKit (2.0):
+    - EZOpenSDK (= 4.8.3)
   - Flutter (1.0.0)
 
 DEPENDENCIES:
   - ez_monitor_player (from `.symlinks/plugins/ez_monitor_player/ios`)
+  - EZUIKit (from `/Users/frank/Downloads/EZUIKit-iOS-master/EZUIKit.podspec`)
   - Flutter (from `.symlinks/flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - EZOpenSDK
 
 EXTERNAL SOURCES:
   ez_monitor_player:
     :path: ".symlinks/plugins/ez_monitor_player/ios"
+  EZUIKit:
+    :path: "/Users/frank/Downloads/EZUIKit-iOS-master/EZUIKit.podspec"
   Flutter:
     :path: ".symlinks/flutter/ios"
 
 SPEC CHECKSUMS:
-  ez_monitor_player: 8bf26e360d574d1081acdec5555c61c9b01d6fb0
+  ez_monitor_player: 6f78623bde87ed44d8996ef154af8d2f952cfe0d
+  EZOpenSDK: 355c8ae8e9660a52bbd877898cf46e1f67dc7d8f
+  EZUIKit: 45134cb675f154a62a5b2a7e0d78014672bfc328
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
 
-PODFILE CHECKSUM: 64b2109b760ac9073c864e2a8278e6464efaa219
+PODFILE CHECKSUM: d3c9bb0db2ccf28006cfc359fcf250921057840c
 
 COCOAPODS: 1.8.3
