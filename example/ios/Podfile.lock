@@ -1,0 +1,22 @@
+PODS:
+  - ez_monitor_player (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - ez_monitor_player (from `.symlinks/plugins/ez_monitor_player/ios`)
+  - Flutter (from `.symlinks/flutter/ios`)
+
+EXTERNAL SOURCES:
+  ez_monitor_player:
+    :path: ".symlinks/plugins/ez_monitor_player/ios"
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+
+SPEC CHECKSUMS:
+  ez_monitor_player: 8bf26e360d574d1081acdec5555c61c9b01d6fb0
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+
+PODFILE CHECKSUM: 64b2109b760ac9073c864e2a8278e6464efaa219
+
+COCOAPODS: 1.8.3
