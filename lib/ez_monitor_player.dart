@@ -12,14 +12,21 @@ typedef void EzMonitorPlayerDidPlayCallback(
     EzMonitorPlayerController controller);
 typedef void EzMonitorPlayerDidPauseCallback(
     EzMonitorPlayerController controller);
+typedef void EzMonitorPlayerDidFailedCallback(
+    EzMonitorPlayerController controller);
 
 class EzMonitorPlayer extends StatefulWidget {
   final EzMonitorPlayerCreatedCallback onPlayerCreated;
   final EzMonitorPlayerDidPlayCallback onDidPlay;
   final EzMonitorPlayerDidPauseCallback onDidPause;
+  final EzMonitorPlayerDidFailedCallback onDidFail;
 
   EzMonitorPlayer(
-      {Key key, this.onPlayerCreated, this.onDidPlay, this.onDidPause})
+      {Key key,
+      this.onPlayerCreated,
+      this.onDidPlay,
+      this.onDidPause,
+      this.onDidFail})
       : super(key: key);
 
   _EzMonitorPlayerState createState() => _EzMonitorPlayerState();
@@ -64,7 +71,7 @@ class EzMonitorPlayerController {
   EzMonitorPlayerController._(
     int id,
     this._widget,
-  ) : _channel = MethodChannel('plugins.xzx/ez_monitor_player$id') {
+  ) : _channel = MethodChannel('plugins.xzx/ez_monitor_player_$id') {
     _channel.setMethodCallHandler(_handleMethod);
   }
   final MethodChannel _channel;
@@ -72,26 +79,37 @@ class EzMonitorPlayerController {
   EzMonitorPlayer _widget;
 
   Future<dynamic> _handleMethod(MethodCall call) async {
+    debugPrint('oc call back');
     String method = call.method;
     switch (method) {
-      case "play":
+      case "didPlay":
         {
+          debugPrint('flutter receive oc call back didPlay');
           _widget.onDidPlay(this);
           return new Future.value("");
         }
-
-      case "pause":
+      case "didPause":
         {
           _widget.onDidPause(this);
+          return new Future.value("");
+        }
+      case "didFailed":
+        {
+          _widget.onDidFail(this);
           return new Future.value("");
         }
     }
     return new Future.value("");
   }
 
+  //"ezopen://open.ys7.com/D01590415/1.hd.live"
+  //_accessToken	@"at.9bkf61je8xypdnj03ho1aj1sdfub8612-2dmoh97t8w-04mdr2y-lbphujgu4"
+  //_appKey @"6e9f8a8c05cb4e57843a85afdf49ff57"
   Future<void> play(String ezOpenUrl) async {
     return await _channel.invokeMethod("play", <String, dynamic>{
-      'ezOpenUrl': ezOpenUrl,
+      'ezOpenUrl': ezOpenUrl.length > 0
+          ? ezOpenUrl
+          : 'ezopen://open.ys7.com/D01590415/5.hd.live',
     });
   }
 

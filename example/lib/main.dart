@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -38,6 +39,8 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  var isLoading = true;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,11 +49,21 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: EzMonitorPlayer(
-              onDidPlay: (controller) {},
+            child: Stack(children: <Widget>[
+          EzMonitorPlayer(
+              onDidPlay: (controller) {
+                setState(() {
+                  isLoading = false;
+                });
+              },
               onDidPause: (controller) {},
-              onPlayerCreated: (controller) {}),
-        ),
+              onPlayerCreated: (controller) {},
+              onDidFail: (controller) {}),
+          Visibility(
+              child: Center(
+                  child: CupertinoActivityIndicator(animating: isLoading)),
+              visible: isLoading)
+        ])),
       ),
     );
   }

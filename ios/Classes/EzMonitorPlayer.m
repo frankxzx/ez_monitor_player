@@ -10,6 +10,10 @@
 #import <EZUIKit/EZUIPlayer.h>
 #import <EZUIKit/EZUIError.h>
 
+@interface EzMonitorPlayer() <EZUIPlayerDelegate>
+
+@end
+
 @implementation EzMonitorPlayer {
     UIView* _view;
     int64_t _viewId;
@@ -60,6 +64,7 @@
 - (void) EZUIPlayerFinished:(EZUIPlayer*) player
 {
     [player stopPlay];
+    [_channel invokeMethod:@"didPause" arguments:nil];
 }
 
 - (void) EZUIPlayerPrepared:(EZUIPlayer*) player
@@ -69,11 +74,14 @@
 
 - (void) EZUIPlayerPlaySucceed:(EZUIPlayer *)player
 {
+    [_channel invokeMethod:@"didPlay" arguments:nil];
 }
 
 - (void) EZUIPlayer:(EZUIPlayer *)player didPlayFailed:(EZUIError *) error
 {
     [player stopPlay];
+    [_channel invokeMethod:@"didFailed" arguments:nil];
+    [player startPlay];
     NSString *message = @"";
     if ([error.errorString isEqualToString:UE_ERROR_INNER_VERIFYCODE_ERROR])
     {
